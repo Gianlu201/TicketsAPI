@@ -91,5 +91,25 @@ namespace Progetto_S19_L5.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpPut]
+        public async Task<IActionResult> EditArtist(
+            [FromQuery] string artistId,
+            [FromBody] EditArtistRequestDto editArtist
+        )
+        {
+            try
+            {
+                var result = await _artistService.EditArtistByIdAsync(artistId, editArtist);
+
+                return result
+                    ? Ok(new EditArtistResponse() { Message = "Artist modified successfully!" })
+                    : BadRequest(new EditArtistResponse() { Message = "Something went wrong!" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

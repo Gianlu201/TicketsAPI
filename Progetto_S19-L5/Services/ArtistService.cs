@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Progetto_S19_L5.Data;
+using Progetto_S19_L5.DTOs.Artist;
 using Progetto_S19_L5.Models;
 
 namespace Progetto_S19_L5.Services
@@ -55,6 +56,33 @@ namespace Progetto_S19_L5.Services
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public async Task<bool> EditArtistByIdAsync(
+            string artistId,
+            EditArtistRequestDto editArtist
+        )
+        {
+            try
+            {
+                var artist = await GetArtistByIdAsync(artistId);
+
+                if (artist == null)
+                {
+                    return false;
+                }
+
+                artist.FirstName = editArtist.FirstName;
+                artist.LastName = editArtist.LastName;
+                artist.Genre = editArtist.Genre;
+                artist.Biography = editArtist.Biography;
+
+                return await TrySaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }
