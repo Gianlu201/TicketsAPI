@@ -1,4 +1,6 @@
-﻿using Progetto_S19_L5.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Progetto_S19_L5.Data;
+using Progetto_S19_L5.DTOs.Event;
 using Progetto_S19_L5.Models;
 
 namespace Progetto_S19_L5.Services
@@ -32,6 +34,81 @@ namespace Progetto_S19_L5.Services
             try
             {
                 var result = _context.Events.Add(newEvent);
+
+                return await TrySaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<Event>?> GetAllEventsAsync()
+        {
+            try
+            {
+                var eventsList = await _context.Events.Include(e => e.Artist).ToListAsync();
+
+                return eventsList;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Event?> GetEventByIdAsync(string eventId)
+        {
+            try
+            {
+                var result = await _context
+                    .Events.Include(e => e.Artist)
+                    .FirstOrDefaultAsync(e => e.Eventid.ToString() == eventId);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> EditEventAsync(string eventId, EditEventRequestDto editEvent)
+        {
+            try
+            {
+                var eventFound = await GetEventByIdAsync(eventId);
+
+                if (eventFound == null)
+                {
+                    return false;
+                }
+
+                eventFound.Title = editEvent.Title;
+                eventFound.Place = editEvent.Place;
+                eventFound.Date = editEvent.Date;
+                eventFound.ArtistId = editEvent.ArtistId;
+
+                return await TrySaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteEventByIdAsync(int eventId)
+        {
+            try
+            {
+                var result = await _context.Events.FindAsync(eventId);
+
+                if (result == null)
+                {
+                    return false;
+                }
+
+                _context.Events.Remove(result);
 
                 return await TrySaveAsync();
             }

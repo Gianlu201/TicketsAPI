@@ -43,7 +43,7 @@ namespace Progetto_S19_L5.Services
             }
         }
 
-        public async Task<List<Artist>?> GetArtistsAsync()
+        public async Task<List<Artist>?> GetAllArtistsAsync()
         {
             try
             {

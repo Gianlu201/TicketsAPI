@@ -44,44 +44,51 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllArtists()
         {
-            var result = await _artistService.GetArtistsAsync();
-
-            if (result == null)
+            try
             {
-                return BadRequest(
+                var result = await _artistService.GetAllArtistsAsync();
+
+                if (result == null)
+                {
+                    return Ok(
+                        new GetAllArtistsResponse() { Message = "No artist found!", Artists = null }
+                    );
+                }
+
+                List<ArtistDto> artistsList = result
+                    .Select(r => new ArtistDto()
+                    {
+                        ArtistId = r.ArtistId,
+                        FirstName = r.FirstName,
+                        LastName = r.LastName,
+                        Genre = r.Genre,
+                        Biography = r.Biography,
+                        Events = r
+                            .Events?.Select(e => new EventSimpleDto()
+                            {
+                                Eventid = e.Eventid,
+                                Title = e.Title,
+                                Date = e.Date,
+                                Place = e.Place,
+                            })
+                            .ToList(),
+                    })
+                    .ToList();
+
+                return Ok(
                     new GetAllArtistsResponse()
                     {
-                        Message = "Something went wrong!",
-                        Artists = null,
+                        Message = "Artists found!",
+                        Artists = artistsList,
                     }
                 );
             }
-
-            List<ArtistDto> artistsList = result
-                .Select(r => new ArtistDto()
-                {
-                    ArtistId = r.ArtistId,
-                    FirstName = r.FirstName,
-                    LastName = r.LastName,
-                    Genre = r.Genre,
-                    Biography = r.Biography,
-                    Events = r
-                        .Events?.Select(e => new EventSimpleDto()
-                        {
-                            Eventid = e.Eventid,
-                            Title = e.Title,
-                            Date = e.Date,
-                            Place = e.Place,
-                        })
-                        .ToList(),
-                })
-                .ToList();
-
-            return Ok(
-                new GetAllArtistsResponse() { Message = "Artists found!", Artists = artistsList }
-            );
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("{artistId}")]
