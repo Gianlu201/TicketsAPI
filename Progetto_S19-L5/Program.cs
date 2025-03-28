@@ -14,7 +14,7 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
     .MinimumLevel.Override("System", Serilog.Events.LogEventLevel.Warning)
     .Enrich.FromLogContext()
-    .WriteTo.Async(a => a.File("Log/log_txt", rollingInterval: RollingInterval.Day))
+    .WriteTo.Async(a => a.File("Log/log_", rollingInterval: RollingInterval.Day))
     .WriteTo.Async(a => a.Console())
     .CreateLogger();
 
@@ -108,6 +108,7 @@ try
     builder.Services.AddScoped<RoleManager<ApplicationRole>>();
 
     builder.Services.AddScoped<ArtistService>();
+    builder.Services.AddScoped<EventService>();
 
     builder.Host.UseSerilog();
 

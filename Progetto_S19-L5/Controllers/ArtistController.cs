@@ -68,13 +68,12 @@ namespace Progetto_S19_L5.Controllers
                     Genre = r.Genre,
                     Biography = r.Biography,
                     Events = r
-                        .Events?.Select(e => new EventDto()
+                        .Events?.Select(e => new EventSimpleDto()
                         {
                             Eventid = e.Eventid,
                             Title = e.Title,
                             Date = e.Date,
                             Place = e.Place,
-                            ArtistId = e.ArtistId,
                         })
                         .ToList(),
                 })
@@ -107,13 +106,12 @@ namespace Progetto_S19_L5.Controllers
                     Genre = artist.Genre,
                     Biography = artist.Biography,
                     Events = artist
-                        .Events?.Select(e => new EventDto()
+                        .Events?.Select(e => new EventSimpleDto()
                         {
                             Eventid = e.Eventid,
                             Title = e.Title,
                             Date = e.Date,
                             Place = e.Place,
-                            ArtistId = e.ArtistId,
                         })
                         .ToList(),
                 };

@@ -20,6 +20,6 @@ namespace Progetto_S19_L5.DTOs.Artist
         public string? Biography { get; set; }
 
         // navigazione
-        public ICollection<EventDto>? Events { get; set; }
+        public ICollection<EventSimpleDto>? Events { get; set; }
     }
 }
