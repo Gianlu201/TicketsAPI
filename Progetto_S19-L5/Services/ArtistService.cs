@@ -43,6 +43,20 @@ namespace Progetto_S19_L5.Services
             }
         }
 
+        public async Task<List<Artist>?> GetArtistsAsync()
+        {
+            try
+            {
+                var artistsList = await _context.Artists.Include(a => a.Events).ToListAsync();
+
+                return artistsList;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<Artist?> GetArtistByIdAsync(string artistId)
         {
             try

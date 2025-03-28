@@ -44,7 +44,49 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetArtist([FromQuery] string artistId)
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _artistService.GetArtistsAsync();
+
+            if (result == null)
+            {
+                return BadRequest(
+                    new GetAllArtistsResponse()
+                    {
+                        Message = "Something went wrong!",
+                        Artists = null,
+                    }
+                );
+            }
+
+            List<ArtistDto> artistsList = result
+                .Select(r => new ArtistDto()
+                {
+                    ArtistId = r.ArtistId,
+                    FirstName = r.FirstName,
+                    LastName = r.LastName,
+                    Genre = r.Genre,
+                    Biography = r.Biography,
+                    Events = r
+                        .Events?.Select(e => new EventDto()
+                        {
+                            Eventid = e.Eventid,
+                            Title = e.Title,
+                            Date = e.Date,
+                            Place = e.Place,
+                            ArtistId = e.ArtistId,
+                        })
+                        .ToList(),
+                })
+                .ToList();
+
+            return Ok(
+                new GetAllArtistsResponse() { Message = "Artists found!", Artists = artistsList }
+            );
+        }
+
+        [HttpGet("{artistId}")]
+        public async Task<IActionResult> GetArtist(string artistId)
         {
             try
             {
@@ -64,23 +106,17 @@ namespace Progetto_S19_L5.Controllers
                     LastName = artist.LastName,
                     Genre = artist.Genre,
                     Biography = artist.Biography,
+                    Events = artist
+                        .Events?.Select(e => new EventDto()
+                        {
+                            Eventid = e.Eventid,
+                            Title = e.Title,
+                            Date = e.Date,
+                            Place = e.Place,
+                            ArtistId = e.ArtistId,
+                        })
+                        .ToList(),
                 };
-
-                if (artist.Events?.Count > 0)
-                {
-                    var eventsList =
-                        (ICollection<EventDto>)
-                            artist.Events.Select(e => new EventDto()
-                            {
-                                Eventid = e.Eventid,
-                                Title = e.Title,
-                                Date = e.Date,
-                                Place = e.Place,
-                                ArtistId = e.ArtistId,
-                            });
-
-                    artistFound.Events = eventsList;
-                }
 
                 return Ok(
                     new GetArtistResponse() { Message = "Artist found!", Artist = artistFound }
