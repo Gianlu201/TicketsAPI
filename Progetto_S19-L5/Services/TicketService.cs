@@ -39,6 +39,7 @@ namespace Progetto_S19_L5.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return false;
             }
         }
@@ -56,6 +57,7 @@ namespace Progetto_S19_L5.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return null;
             }
         }
@@ -74,6 +76,7 @@ namespace Progetto_S19_L5.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return null;
             }
         }
@@ -91,6 +94,7 @@ namespace Progetto_S19_L5.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return null;
             }
         }
@@ -113,6 +117,7 @@ namespace Progetto_S19_L5.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return false;
             }
         }
@@ -134,6 +139,7 @@ namespace Progetto_S19_L5.Services
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return false;
             }
         }

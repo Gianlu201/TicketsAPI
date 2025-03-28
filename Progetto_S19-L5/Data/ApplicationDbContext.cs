@@ -87,7 +87,7 @@ namespace Progetto_S19_L5.Data
                     {
                         Id = "849b8726-44b3-434b-9b18-48a4e8d4e9dd",
                         Name = "User",
-                        NormalizedName = "User",
+                        NormalizedName = "USER",
                     }
                 );
 
