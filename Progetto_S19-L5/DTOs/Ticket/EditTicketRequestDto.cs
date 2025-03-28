@@ -9,8 +9,5 @@ namespace Progetto_S19_L5.DTOs.Ticket
 
         [Required]
         public int EventId { get; set; }
-
-        [Required]
-        public required string UserId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Progetto_S19_L5.Data;
 using Progetto_S19_L5.DTOs.Artist;
@@ -20,6 +21,7 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CreateEventRequestDto createEvent)
         {
             try
@@ -120,6 +122,7 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpPut("{eventId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditEvent(
             string eventId,
             [FromBody] EditEventRequestDto editEvent
@@ -140,6 +143,7 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpDelete("{eventId:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int eventId)
         {
             var result = await _eventService.DeleteEventByIdAsync(eventId);

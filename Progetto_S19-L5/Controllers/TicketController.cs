@@ -12,6 +12,7 @@ namespace Progetto_S19_L5.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TicketController : ControllerBase
     {
         private readonly TicketService _ticketService;
@@ -50,6 +51,7 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllTickets()
         {
             try
@@ -106,6 +108,7 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpGet("{ticketId:int}")]
+        [Authorize]
         public async Task<IActionResult> GetTicket(int ticketId)
         {
             try
@@ -152,6 +155,7 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpPut("{ticketId:int}")]
+        [Authorize]
         public async Task<IActionResult> EditTicket(
             int ticketId,
             [FromBody] EditTicketRequestDto editTicket
@@ -172,6 +176,7 @@ namespace Progetto_S19_L5.Controllers
         }
 
         [HttpDelete("{ticketId:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int ticketId)
         {
             var result = await _ticketService.DeleteTicketByIdAsync(ticketId);

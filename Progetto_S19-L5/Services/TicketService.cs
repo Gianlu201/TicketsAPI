@@ -90,7 +90,6 @@ namespace Progetto_S19_L5.Services
 
                 result.DateBought = editTicket.DateBought;
                 result.EventId = editTicket.EventId;
-                result.UserId = editTicket.UserId;
 
                 return await TrySaveAsync();
             }
