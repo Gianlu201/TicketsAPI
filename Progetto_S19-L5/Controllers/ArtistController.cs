@@ -111,5 +111,15 @@ namespace Progetto_S19_L5.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _artistService.DeleteArtistByIdAsync(id);
+
+            return result
+                ? Ok(new DeleteArtistResponse() { Message = "Artist deleted successfully" })
+                : BadRequest(new DeleteArtistResponse() { Message = "Something went wrong!" });
+        }
     }
 }

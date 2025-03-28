@@ -85,5 +85,26 @@ namespace Progetto_S19_L5.Services
                 return false;
             }
         }
+
+        public async Task<bool> DeleteArtistByIdAsync(int artistId)
+        {
+            try
+            {
+                var artist = await GetArtistByIdAsync(artistId.ToString());
+
+                if (artist == null)
+                {
+                    return false;
+                }
+
+                _context.Artists.Remove(artist);
+
+                return await TrySaveAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
