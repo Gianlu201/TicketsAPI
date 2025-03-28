@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Progetto_S19_L5.Data;
 using Progetto_S19_L5.Models.Auth;
+using Progetto_S19_L5.Services;
 using Progetto_S19_L5.Settings;
 using Serilog;
 
@@ -105,6 +106,8 @@ try
     builder.Services.AddScoped<UserManager<ApplicationUser>>();
     builder.Services.AddScoped<SignInManager<ApplicationUser>>();
     builder.Services.AddScoped<RoleManager<ApplicationRole>>();
+
+    builder.Services.AddScoped<ArtistService>();
 
     builder.Host.UseSerilog();
 
