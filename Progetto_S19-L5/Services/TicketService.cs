@@ -60,6 +60,24 @@ namespace Progetto_S19_L5.Services
             }
         }
 
+        public async Task<List<Ticket>?> GetAllMyTicketsAsync(string userId)
+        {
+            try
+            {
+                var myTicketsList = await _context
+                    .Tickets.Include(e => e.Event)
+                    .Include(u => u.ApplicationUser)
+                    .Where(t => t.ApplicationUser.Id == userId)
+                    .ToListAsync();
+
+                return myTicketsList;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<Ticket?> GetTicketByIdAsync(int ticketId)
         {
             try

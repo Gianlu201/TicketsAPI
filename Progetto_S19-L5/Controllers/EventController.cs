@@ -77,9 +77,11 @@ namespace Progetto_S19_L5.Controllers
                 })
                 .ToList();
 
-            return Ok(
-                new GetAllEventsResponse() { Message = "Events found!", Events = eventsList }
-            );
+            var count = eventsList.Count;
+
+            var message = count == 1 ? $"{count} event found!" : $"{count} events found!";
+
+            return Ok(new GetAllEventsResponse() { Message = message, Events = eventsList });
         }
 
         [HttpGet("{eventId}")]
