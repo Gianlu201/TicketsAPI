@@ -1,0 +1,13 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Progetto_S19_L5.DTOs.Ticket
+{
+    public class CreateTicketRequestDto
+    {
+        [Required]
+        public DateTime DateBought { get; set; }
+
+        [Required]
+        public int EventId { get; set; }
+    }
+}

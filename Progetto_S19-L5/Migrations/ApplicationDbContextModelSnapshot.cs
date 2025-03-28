@@ -259,7 +259,7 @@ namespace Progetto_S19_L5.Migrations
                         {
                             Id = "55e83e62-2057-45b0-82fe-33a4cba69a2e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c8a2876a-b721-465b-b48d-d80c089a0a85",
+                            ConcurrencyStamp = "7c0e66fd-9e03-49cb-aafa-94bf91d80de3",
                             Email = "admin@example.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -270,7 +270,7 @@ namespace Progetto_S19_L5.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEPTjFiaYaGtq8tsslxnhffNqhCeoVvpygVnS8vRbrx/pI2O2Nb7Q75iDvT4ZIQWV4g==",
                             PhoneNumber = "0000000000",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "925f9b95-5764-473c-84ce-8222195c343f",
+                            SecurityStamp = "c398f803-0583-4958-bfcb-c682d74b8bcd",
                             TwoFactorEnabled = false,
                             UserName = "admin@example.com"
                         },
@@ -278,7 +278,7 @@ namespace Progetto_S19_L5.Migrations
                         {
                             Id = "7f11db70-49f5-4c66-bad3-51085c2bd27a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa9a58ba-9122-416d-bc92-d13b24d6bf34",
+                            ConcurrencyStamp = "46c34222-c0b0-4abb-ac58-9aa817131281",
                             Email = "mario.mario@examople.com",
                             EmailConfirmed = false,
                             FirstName = "Mario",
@@ -289,7 +289,7 @@ namespace Progetto_S19_L5.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEKaVk2PilFpBF+5mhGmCiGOtIF+qHjjpf0Z4ukKkpAnff1/s2WJ/UiFQh4aZ9iP2YQ==",
                             PhoneNumber = "1111111111",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "32df0bbc-ccd3-4f59-b000-345c82f3c471",
+                            SecurityStamp = "743ba5cc-0b31-4fc9-b5e4-4173b742fb04",
                             TwoFactorEnabled = false,
                             UserName = "mario.mario@example.com"
                         },
@@ -297,7 +297,7 @@ namespace Progetto_S19_L5.Migrations
                         {
                             Id = "766609fc-a1bd-4ca8-bc3b-8167dd9ba0f2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b966421-2fc7-4d8a-aa9a-75d81b38cc26",
+                            ConcurrencyStamp = "d9cb981f-0e71-4d2d-92c5-07f7d89a9705",
                             Email = "luigi.mario@example.com",
                             EmailConfirmed = false,
                             FirstName = "Luigi",
@@ -308,7 +308,7 @@ namespace Progetto_S19_L5.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEHyzjydlPHBKYr6FC7KflthqGK/GbH+NZI8pY+a4rzNrqB7yy7z2HO+fuvlBfxjk5w==",
                             PhoneNumber = "2222222222",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c2b8823-499a-4d12-accc-d1ea9c395e89",
+                            SecurityStamp = "60625f46-bead-4f69-a177-7e4a69c861c0",
                             TwoFactorEnabled = false,
                             UserName = "luigi.mario@example.com"
                         });
@@ -382,9 +382,6 @@ namespace Progetto_S19_L5.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ticketid"));
-
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateBought")
                         .HasColumnType("datetime2");

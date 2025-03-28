@@ -1,26 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Progetto_S19_L5.DTOs.Account;
+using Progetto_S19_L5.DTOs.Event;
 using Progetto_S19_L5.Models.Auth;
 
-namespace Progetto_S19_L5.Models
+namespace Progetto_S19_L5.DTOs.Ticket
 {
-    public class Ticket
+    public class TicketDto
     {
-        [Key]
+        [Required]
         public int Ticketid { get; set; }
 
         [Required]
         public DateTime DateBought { get; set; }
 
+        [Required]
         public int EventId { get; set; }
 
-        public string UserId { get; set; }
+        [Required]
+        public required string UserId { get; set; }
 
         // navigazione
         [ForeignKey(nameof(EventId))]
-        public Event Event { get; set; }
+        public EventSimpleDto Event { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUserSimpleDto ApplicationUser { get; set; }
     }
 }
