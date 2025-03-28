@@ -1,4 +1,5 @@
-﻿using Progetto_S19_L5.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Progetto_S19_L5.Data;
 using Progetto_S19_L5.Models;
 
 namespace Progetto_S19_L5.Services
@@ -38,6 +39,22 @@ namespace Progetto_S19_L5.Services
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+
+        public async Task<Artist?> GetArtistByIdAsync(string artistId)
+        {
+            try
+            {
+                var artist = await _context
+                    .Artists.Include(a => a.Events)
+                    .FirstOrDefaultAsync(a => a.ArtistId.ToString() == artistId);
+
+                return artist;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
     }
